@@ -1,5 +1,5 @@
 echo "Đang tải file xuống - Download windows files"
-wget -O w7x64.img https://bit.ly/4khQExz
+wget -O w7x64.qcow2 https://bit.ly/4khQExz
 echo "Download ngrok"
 wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > /dev/null 2>&1
 unzip ngrok-stable-linux-amd64.zip > /dev/null 2>&1
@@ -18,5 +18,5 @@ echo Password: Akuh.Net
 echo "Chờ 1-2 phút để hoàn tất - Wait 1-2 minute to finish bot"
 echo "Vui lòng không tắt cửa sổ này - Dont Close This Tab"
 echo "Please support toigamo.blogspot.com thank you"
-qemu-system-x86_64 -M q35 -usb -device qemu-xhci -device usb-tablet -device usb-kbd -cpu qemu64,+sse,+sse2,+sse4.1,+sse4.2,+pae,hv-relaxed -smp sockets=1,cores=4,threads=1 -m 8082M -drive file=disk.qcow2,aio=threads,cache=writeback,if=none,id=hda -device ahci,id=hdaahci -device ide-hd,drive=hda,bus=hdaahci.0 -drive file=win.iso,media=cdrom,if=none,id=cdrom0 -device ide-cd,drive=cdrom0,bus=ide.0 -vga std -device ich9-intel-hda -device hda-duplex -device e1000e,netdev=n0 -netdev user,id=n0 -accel tcg,thread=multi -boot d,menu=on -device intel-iommu -vnc :0
+qemu-system-x86_64 -M q35 -usb -device qemu-xhci -device usb-tablet -device usb-kbd -cpu qemu64,+sse,+sse2,+sse4.1,+sse4.2,+pae,hv-relaxed -smp sockets=1,cores=4,threads=1 -m 8082M -drive file=w7x64.qcow2,aio=threads,cache=writeback,if=none,id=hda -device ahci,id=hdaahci -device ide-hd,drive=hda,bus=hdaahci.0 -drive file=win.iso,media=cdrom,if=none,id=cdrom0 -device ide-cd,drive=cdrom0,bus=ide.0 -vga std -device ich9-intel-hda -device hda-duplex -device e1000e,netdev=n0 -netdev user,id=n0 -accel tcg,thread=multi -boot d,menu=on -device intel-iommu -vnc :0
 sleep 43200
