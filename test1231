@@ -20,7 +20,7 @@ echo "Vui lòng không tắt cửa sổ này - Dont Close This Tab"
 echo "Please support toigamo.blogspot.com thank you"
 qemu-system-x86_64 \
   -m 2096 \
-  -smp 1 \
+  -smp 4 \
   -drive file=disk.qcow2,if=virtio \
   -netdev user,id=n1,hostfwd=tcp::3389-:3389 \
   -device virtio-net,netdev=n1 \
