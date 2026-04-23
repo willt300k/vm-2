@@ -1,5 +1,5 @@
 echo "Đang tải file xuống - Download windows files"
-wget -O "disk.qcow2" https://bit.ly/4khQExz
+wget -O "disk.qcow2" https://bit.ly/42qtsoo
 echo "Download ngrok"
 wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > /dev/null 2>&1
 unzip ngrok-stable-linux-amd64.zip > /dev/null 2>&1
@@ -14,17 +14,7 @@ echo "Starting Windows"
 echo RDP Address:
 curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p'
 echo "Ctrl+C để copy - Ctrl+C To Copy"
-echo Username: akuh
-echo Password: Akuh.Net
 echo "Chờ 1-2 phút để hoàn tất - Wait 1-2 minute to finish bot"
 echo "Vui lòng không tắt cửa sổ này - Dont Close This Tab"
 echo "Please support toigamo.blogspot.com thank you"
-qemu-system-x86_64 \
-  -m 2096 \
-  -smp 4 \
-  -drive file=disk.qcow2,if=virtio \
-  -netdev user,id=n1,hostfwd=tcp::3389-:3389 \
-  -device virtio-net,netdev=n1 \
-  -nographic \
-  -vnc :0
-sleep 43200
+qemu-system-x86_64 -m 6G -cpu Penryn,vendor=GenuineIntel,+sep,+sse4.1,+sse4.2,+x2apic,+aes,model-id="Intel® Xeon® Platinum" -smp 4,cores=4,threads=1 -accel tcg,thread=multi,tb-size=1024 -machine pc,usb=off,vmport=off -rtc base=localtime,clock=host -drive file=disk.qcow2,if=ide,cache=writeback,aio=threads,format=qcow2 -netdev user,id=net0,hostfwd=tcp::3389-:3389,hostfwd=tcp::5938-:5938 -device e1000,netdev=net0 -vga std -device secondary-vga,vgamem_mb=1024 -device usb-ehci,id=usb,bus=pci.0,addr=0x4 -device usb-tablet -nographic -vnc :0
